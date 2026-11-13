@@ -47,7 +47,9 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
         foreach (['nilai', 'logbook', 'absensi_kegiatan', 'kegiatan_anggota', 'kegiatan', 'absensi_piket', 'jadwal_piket_anggota', 'jadwal_piket'] as $table) {
             DB::table($table)->delete();
-            DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
+            if (DB::getDriverName() === 'mysql') {
+                DB::statement("ALTER TABLE {$table} AUTO_INCREMENT = 1");
+            }
         }
         Schema::enableForeignKeyConstraints();
 

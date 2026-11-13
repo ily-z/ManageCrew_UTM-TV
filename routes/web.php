@@ -11,6 +11,9 @@ Route::get('/admin/export/absensi', AbsensiExportController::class)
 // Layar QR di kantor / lokasi kegiatan (khusus admin)
 Route::get('/qr-display', QrDisplayController::class)->middleware(['auth']);
 
+// Landing page publik (UTM TV)
+Route::view('/', 'landing')->name('landing');
+
 // Named login untuk redirect middleware auth (halaman yang sama dengan SPA)
 Route::view('/login', 'app')->name('login');
 

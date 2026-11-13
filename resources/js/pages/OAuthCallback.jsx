@@ -15,7 +15,7 @@ export default function OAuthCallback() {
             return;
         }
         loginWithGoogleToken(decodeURIComponent(match[1]))
-            .then(() => navigate('/', { replace: true }))
+            .then(() => navigate('/beranda', { replace: true }))
             .catch(() => navigate('/login?error=google', { replace: true }));
     }, []);
 

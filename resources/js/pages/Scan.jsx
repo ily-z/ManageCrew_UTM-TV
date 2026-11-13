@@ -85,7 +85,7 @@ export default function Scan() {
                     <div className="text-3xl">✅</div>
                     <div className="mt-1 font-semibold text-green-700">{result.message}</div>
                     <div className="text-sm text-green-600 capitalize">{String(result.status).replace('_', ' ')} · {result.waktu_scan}</div>
-                    <button onClick={() => navigate('/')} className="mt-3 rounded-lg bg-green-600 px-4 py-1.5 text-sm text-white">
+                    <button onClick={() => navigate('/beranda')} className="mt-3 rounded-lg bg-green-600 px-4 py-1.5 text-sm text-white">
                         Selesai
                     </button>
                 </div>

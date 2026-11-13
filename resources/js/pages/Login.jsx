@@ -19,7 +19,7 @@ export default function Login() {
         setError('');
         try {
             await loginWithPassword(email, password);
-            navigate('/');
+            navigate('/beranda');
         } catch (err) {
             setError(err.message);
         } finally {

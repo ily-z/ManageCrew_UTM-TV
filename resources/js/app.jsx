@@ -1,6 +1,7 @@
 import React from 'react';
-import { Navigate, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
-import { useAuth } from './auth.jsx';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Navigate, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './auth.jsx';
 import Login from './pages/Login.jsx';
 import OAuthCallback from './pages/OAuthCallback.jsx';
 import Dashboard from './pages/Dashboard.jsx';
@@ -11,7 +12,7 @@ import Nilai from './pages/Nilai.jsx';
 import Profil from './pages/Profil.jsx';
 
 const NAV = [
-    { to: '/', label: 'Beranda', icon: '🏠' },
+    { to: '/beranda', label: 'Beranda', icon: '🏠' },
     { to: '/scan', label: 'Scan QR', icon: '📷' },
     { to: '/izin', label: 'Ajukan Izin', icon: '📝' },
     { to: '/logbook', label: 'Logbook', icon: '📖' },
@@ -48,7 +49,7 @@ function Shell({ children }) {
                                         isActive ? 'bg-white font-semibold text-amber-600' : 'text-white/90 hover:bg-white/10'
                                     }`
                                 }
-                                end={n.to === '/'}
+                                end={n.to === '/beranda'}
                             >
                                 <span>{n.icon}</span> {n.label}
                             </NavLink>
@@ -76,13 +77,23 @@ export default function App() {
         <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/oauth/callback" element={<OAuthCallback />} />
-            <Route path="/" element={<Protected><Dashboard /></Protected>} />
+            <Route path="/beranda" element={<Protected><Dashboard /></Protected>} />
             <Route path="/scan" element={<Protected><Scan /></Protected>} />
             <Route path="/izin" element={<Protected><Izin /></Protected>} />
             <Route path="/logbook" element={<Protected><Logbook /></Protected>} />
             <Route path="/nilai" element={<Protected><Nilai /></Protected>} />
             <Route path="/profil" element={<Protected><Profil /></Protected>} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/beranda" replace />} />
         </Routes>
     );
 }
+
+createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <AuthProvider>
+                <App />
+            </AuthProvider>
+        </BrowserRouter>
+    </React.StrictMode>
+);
